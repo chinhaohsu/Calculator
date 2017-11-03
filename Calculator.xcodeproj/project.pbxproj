@@ -13,12 +13,12 @@
 		AE3B4BBC1FAC425800E1DFE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3B4BBB1FAC425800E1DFE4 /* Assets.xcassets */; };
 		AE3B4BBF1FAC425800E1DFE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE3B4BBD1FAC425800E1DFE4 /* LaunchScreen.storyboard */; };
 		AE48AE0C1FAC8127005E9D56 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE48AE0B1FAC8127005E9D56 /* CalculatorBrain.swift */; };
-		AE48AE0F1FACAF80005E9D56 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE48AE0B1FAC8127005E9D56 /* CalculatorBrain.swift */; };
 		AE48AE101FACAF80005E9D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B4BB61FAC425800E1DFE4 /* ViewController.swift */; };
 		AE48AE111FACAF80005E9D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3B4BB41FAC425800E1DFE4 /* AppDelegate.swift */; };
 		AE48AE141FACAF80005E9D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE3B4BBD1FAC425800E1DFE4 /* LaunchScreen.storyboard */; };
 		AE48AE151FACAF80005E9D56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3B4BBB1FAC425800E1DFE4 /* Assets.xcassets */; };
 		AE48AE161FACAF80005E9D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE3B4BB81FAC425800E1DFE4 /* Main.storyboard */; };
+		AE78BFB81FACB6990039A540 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE48AE0B1FAC8127005E9D56 /* CalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,7 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE48AE0F1FACAF80005E9D56 /* CalculatorBrain.swift in Sources */,
+				AE78BFB81FACB6990039A540 /* CalculatorBrain.swift in Sources */,
 				AE48AE101FACAF80005E9D56 /* ViewController.swift in Sources */,
 				AE48AE111FACAF80005E9D56 /* AppDelegate.swift in Sources */,
 			);
