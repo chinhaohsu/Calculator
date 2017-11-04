@@ -40,11 +40,14 @@ struct CalculatorBrain {
         "e": Operation.constant(M_E),
         "√": Operation.unaryOperation(sqrt),  //sqrt
         "cos": Operation.unaryOperation(cos),
+        "sin": Operation.unaryOperation(sin),
+        "log10": Operation.unaryOperation(log10),
         "±": Operation.unaryOperation({ -$0 }),
         "×": Operation.binaryOperation({ $0 * $1 }), //closure, swift knows it would be a (Double, Double) -> Double function
         "÷": Operation.binaryOperation({ $0 / $1 }),
         "+": Operation.binaryOperation({ $0 + $1 }),
         "-": Operation.binaryOperation({ $0 - $1 }),
+        "%": Operation.unaryOperation({ $0/100.0 }),
         "=": Operation.equals
         
     ]
@@ -122,6 +125,12 @@ struct CalculatorBrain {
     {
         
         accumulator = operand
+    }
+    
+    mutating func reset()
+    {
+        accumulator = nil
+        description = nil
     }
     
     var result: Double?  //make it read-only

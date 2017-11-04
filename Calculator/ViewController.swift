@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!  //automactically initialized with nil, automatically unwrapped it every single time it appears in the code
     
+    @IBOutlet weak var displayDescription: UILabel!
+    
     var userIsInTheMiddleOfTyping = false
     var userIsInTheMiddleOfTypingFloat = false
     var userIsInTheMiddleOfTypingZero = false
@@ -20,32 +22,59 @@ class ViewController: UIViewController {
         let digit = sender.currentTitle!
         if digit == "."
         {
-            if userIsInTheMiddleOfTypingFloat || !userIsInTheMiddleOfTyping { }
+            if userIsInTheMiddleOfTypingFloat {}
             else
             {
-                userIsInTheMiddleOfTypingFloat = true
-                let textCurrentlyInDisplay = display.text!
-                display.text = textCurrentlyInDisplay + digit
+                if !userIsInTheMiddleOfTyping
+                { display.text = "0." }
+                else
+                {
+                    let textCurrentlyInDisplay = display.text!
+                    display.text = textCurrentlyInDisplay + digit
+                }
             }
+            userIsInTheMiddleOfTyping = true
+            userIsInTheMiddleOfTypingFloat = true
             userIsInTheMiddleOfTypingZero = false
         }
-        else if digit == "0" && userIsInTheMiddleOfTypingZero {}
+        else if digit == "0"
+        {
+            if userIsInTheMiddleOfTypingZero {}
+            else
+            {
+                if userIsInTheMiddleOfTyping
+                {
+                    let textCurrentlyInDisplay = display.text!
+                    display.text = textCurrentlyInDisplay + digit
+                }
+                else
+                {
+                    display.text = "0"
+                    userIsInTheMiddleOfTypingZero = true
+                    userIsInTheMiddleOfTyping = true
+                }
+            }
+        }
         else
         {
-            if userIsInTheMiddleOfTyping
+            if userIsInTheMiddleOfTypingZero
             {
-                let textCurrentlyInDisplay = display.text!
-                display.text = textCurrentlyInDisplay + digit
+                display.text = digit
+                userIsInTheMiddleOfTyping = true
                 userIsInTheMiddleOfTypingZero = false
             }
             else
             {
-                display.text = digit
-                userIsInTheMiddleOfTyping = true
-                if digit == "0"
-                { userIsInTheMiddleOfTypingZero = true }
+                if userIsInTheMiddleOfTyping
+                {
+                    let textCurrentlyInDisplay = display.text!
+                    display.text = textCurrentlyInDisplay + digit
+                }
                 else
-                { userIsInTheMiddleOfTypingZero = false }
+                {
+                    display.text = digit
+                    userIsInTheMiddleOfTyping = true
+                }
             }
         }
         
@@ -77,6 +106,15 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func perfromClear(_ sender: UIButton) {
+        display.text = "0"
+        displayDescription.text = " "
+        brain.reset()
+        userIsInTheMiddleOfTyping = false
+        userIsInTheMiddleOfTypingFloat = false
+        userIsInTheMiddleOfTypingZero = false
+        
+    }
     
     
 
