@@ -12,16 +12,23 @@ import Foundation
 /*
 struct vs class
 1. no inheritance
-2. does not live in heap, pass by by copying (not pointer)
+2. valued type: does not live in heap, pass around by copying (not pointer)
 3. automatically initialize
 */
+
+/* why struct for calculatorbrain?
+not goint to have a lot of things referencing to it
+*/
+
 
 struct CalculatorBrain {
     
     private var accumulator: Double? //no value when started the brain
+    private var resultIsPending = false
+    private var description: String?   //to build...
     
     private enum Operation {
-        case constant(Double)  //optionals are enum, can have associated value
+        case constant(Double)  //enum can have associated value, ex. optionals have two enum nil or not nil (associated with specific type
         case unaryOperation((Double) -> Double)
         case binaryOperation((Double, Double) -> Double)
         case equals
@@ -47,17 +54,28 @@ struct CalculatorBrain {
             switch operation {
             case .constant(let value):
                 accumulator = value
+                resultIsPending = false
             case .unaryOperation(let function):
                 if accumulator != nil {
                     accumulator = function(accumulator!)
                 }
+                resultIsPending = false
             case .binaryOperation(let function):
                 if accumulator != nil {
-                    pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!)
-                    accumulator = nil
+                    if pendingBinaryOperation != nil {
+                        performPendingBinaryOperation()
+                        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!)
+                    } else {
+                    
+                        pendingBinaryOperation = PendingBinaryOperation(function: function, firstOperand: accumulator!)
+                        accumulator = nil
+                    }
+                    resultIsPending = true
+                    
                 }
             case .equals:
                 performPendingBinaryOperation()
+                resultIsPending = false
                 
             }
         }
@@ -100,13 +118,19 @@ struct CalculatorBrain {
     
    
     
-    mutating func setOperand(_ operand: Double){    //tell swift it writes, so that swift would copy the struct again
+    mutating func setOperand(_ operand: Double)  //tell swift it writes, so that swift would copy the struct again
+    {
+        
         accumulator = operand
     }
     
-    var result: Double? {   //make it read-only
-        get {
-            return accumulator
-        }
+    var result: Double?  //make it read-only
+    {
+        get { return accumulator }
     }
+    var toDisplayRaw: String?
+    {
+        get { return description }
+    }
+    
 }
