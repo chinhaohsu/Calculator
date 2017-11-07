@@ -93,9 +93,6 @@ class ViewController: UIViewController {
             brain.setOperand(displayValue)
         }
         
-        userIsInTheMiddleOfTyping = false
-        userIsInTheMiddleOfTypingFloat = false
-        userIsInTheMiddleOfTypingZero = false
         
         if let mathematicalSymbol = sender.currentTitle {
             brain.performOperation(mathematicalSymbol)
@@ -104,6 +101,27 @@ class ViewController: UIViewController {
         if let result = brain.result {
             displayValue = result
         }
+
+        assert(brain.toDisplayRaw != nil)
+        assert(sender.currentTitle != nil)
+        if brain.inTheMiddleOfPending
+        {
+            displayDescription.text = brain.toDisplayRaw! + "..."
+        }
+        else if sender.currentTitle == "=" && brain.toDisplayRaw != ""
+        {
+            displayDescription.text = brain.toDisplayRaw! + "="
+        }
+        else
+        {
+            displayDescription.text = brain.toDisplayRaw! 
+        }
+
+        userIsInTheMiddleOfTyping = false
+        userIsInTheMiddleOfTypingFloat = false
+        userIsInTheMiddleOfTypingZero = false
+        
+
     }
     
     @IBAction func perfromClear(_ sender: UIButton) {
