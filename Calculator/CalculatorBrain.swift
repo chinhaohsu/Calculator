@@ -85,7 +85,10 @@ struct CalculatorBrain {
                         }
                         else
                         {
-                            description = symbol + "(" + String(accumulator!) + ")"
+                            if accumulator != nil
+                            {
+                                description = symbol + "(" + String(accumulator!) + ")"
+                            }
                         }
                     }
                     accumulator = function(accumulator!)

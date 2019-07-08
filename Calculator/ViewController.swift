@@ -102,9 +102,14 @@ class ViewController: UIViewController {
             displayValue = result
         }
 
-        assert(brain.toDisplayRaw != nil)
+       
         assert(sender.currentTitle != nil)
-        if brain.inTheMiddleOfPending
+        /*
+        if brain.toDisplayRaw == nil
+        {
+            displayDescription.text = " "
+        }
+        else if brain.inTheMiddleOfPending
         {
             displayDescription.text = brain.toDisplayRaw! + "..."
         }
@@ -114,7 +119,19 @@ class ViewController: UIViewController {
         }
         else
         {
-            displayDescription.text = brain.toDisplayRaw! 
+            displayDescription.text = brain.toDisplayRaw!
+        }
+        */
+        
+        
+        displayDescription.text = brain.toDisplayRaw ?? " "
+        if brain.inTheMiddleOfPending
+        {
+            displayDescription.text = displayDescription.text! + "..."
+        }
+        else if sender.currentTitle == "=" && brain.toDisplayRaw != ""
+        {
+            displayDescription.text = brain.toDisplayRaw! + "="
         }
 
         userIsInTheMiddleOfTyping = false
